@@ -48,38 +48,6 @@
     </view>
     <goodList goods="{{newGoods}}"></goodList>
   </view>
-
-  <view class="a-section a-brand">
-    <view class="h">
-      <view class="title">
-        <navigator url="../brand/brand">
-          <text class="txt">品牌制造商直供</text>
-        </navigator>
-      </view>
-    </view>
-    <view class="b">
-      <view class="item item-1" wx:for="{{brands}}" wx:key="id">
-        <navigator url="/pages/brandDetail/brandDetail?id={{item.id}}">
-          <view class="wrap">
-            <image class="img" src="{{item.picUrl}}" mode="aspectFill"></image>
-            <view class="mt">
-              <text class="brand">{{item.name}}</text>
-            </view>
-          </view>
-        </navigator>
-      </view>
-    </view>
-  </view>
-
-  <view class="good-grid" wx:for="{{floorGoods}}" wx:key="id">
-    <navigator url="/pages/category/category?id={{item.id}}" class="more-a">
-      <view class="h" wx:if="{{item.goodsList.length > 0}}">
-        <text>{{item.name}}</text>
-      </view>
-    </navigator>
-    <goodList goods="{{item.goodsList}}"></goodList>
-  </view>
-
   <view class="a-section a-topic" wx:if="topics.length > 0">
     <view class="h">
       <view class="title">
