@@ -42,6 +42,8 @@ module.exports = {
 
   CollectList: WxApiRoot + 'collect/list', //收藏列表
   CollectAddOrDelete: WxApiRoot + 'collect/addordelete', //添加或取消收藏
+  CollectStatus: WxApiRoot + 'collect/status', //收藏状态
+
 
   CommentList: WxApiRoot + 'comment/list', //评论列表
   CommentCount: WxApiRoot + 'comment/count', //评论总数

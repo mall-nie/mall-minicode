@@ -27,8 +27,8 @@ Page({
     hasCollectImage: '/static/images/icon_collect_checked.png',
     collectImage: '/static/images/icon_collect.png',
     shareImage: '',
-    isGroupon: false, //标识是否是一个参团购买
     soldout: false,
+    isCollect:false,
     canWrite: false
   },
 
