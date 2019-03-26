@@ -9,8 +9,6 @@ Page({
   data: {
     id: 0,
     goods: {},
-    groupon: [], //该商品支持的团购规格
-    grouponLink: {}, //参与的团购
     attribute: [],
     issueList: [],
     comment: [],
@@ -68,22 +66,6 @@ Page({
     this.sharePop.togglePopup();
   },
 
-  //从分享的团购进入
-  getGrouponInfo: function(grouponId) {
-    let that = this;
-    util.request(api.GroupOnJoin, {
-      grouponId: grouponId
-    }).then(function(res) {
-      if (res.errno === 0) {
-        that.setData({
-          grouponLink: res.data.groupon,
-          id: res.data.goods.id
-        });
-        //获取商品详情
-        that.getGoodsInfo();
-      }
-    });
-  },
 
   // 获取商品信息
   getGoodsInfo: function() {
@@ -132,26 +114,8 @@ Page({
           productList: res.data.productList,
           userHasCollect: res.data.userHasCollect,
           shareImage: res.data.shareImage,
-          checkedSpecPrice: res.data.info.retailPrice,
-          groupon: res.data.groupon
+          checkedSpecPrice: res.data.info.retailPrice
         });
-
-        //如果是通过分享的团购参加团购，则团购项目应该与分享的一致并且不可更改
-        if (that.data.isGroupon) {
-          let groupons = that.data.groupon;
-          for (var i = 0; i < groupons.length; i++) {
-            if (groupons[i].id != that.data.grouponLink.rulesId) {
-              groupons.splice(i, 1);
-            }
-          }
-          groupons[0].checked = true;
-          //重设团购规格
-          that.setData({
-            groupon: groupons
-          });
-
-        }
-
         if (res.data.userHasCollect == 1) {
           that.setData({
             collectImage: that.data.hasCollectImage
@@ -195,23 +159,6 @@ Page({
 
     let specName = event.currentTarget.dataset.name;
     let specValueId = event.currentTarget.dataset.valueId;
-
-    let _grouponList = this.data.groupon;
-    for (let i = 0; i < _grouponList.length; i++) {
-      if (_grouponList[i].id == specValueId) {
-        if (_grouponList[i].checked) {
-          _grouponList[i].checked = false;
-        } else {
-          _grouponList[i].checked = true;
-        }
-      } else {
-        _grouponList[i].checked = false;
-      }
-    }
-
-    this.setData({
-      groupon: _grouponList,
-    });
   },
 
   // 规格选择
@@ -247,19 +194,6 @@ Page({
     this.changeSpecInfo();
 
     //重新计算哪些值不可以点击
-  },
-
-  //获取选中的团购信息
-  getCheckedGrouponValue: function() {
-    let checkedValues = {};
-    let _grouponList = this.data.groupon;
-    for (let i = 0; i < _grouponList.length; i++) {
-      if (_grouponList[i].checked) {
-        checkedValues = _grouponList[i];
-      }
-    }
-
-    return checkedValues;
   },
 
   //获取选中的规格信息
@@ -390,12 +324,6 @@ Page({
       this.getGoodsInfo();
     }
 
-    if (options.grouponId) {
-      this.setData({
-        isGroupon: true,
-      });
-      this.getGrouponInfo(options.grouponId);
-    }
     let that = this;
     wx.getSetting({
         success: function (res) {
@@ -523,8 +451,6 @@ Page({
             // 如果storage中设置了cartId，则是立即购买，否则是购物车购买
             try {
               wx.setStorageSync('cartId', res.data);
-              wx.setStorageSync('grouponRulesId', checkedGroupon.id);
-              wx.setStorageSync('grouponLinkId', that.data.grouponLink.id);
               wx.navigateTo({
                 url: '/pages/shopping/checkout/checkout'
               })
