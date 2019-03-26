@@ -7,9 +7,6 @@
     "pages/ucenter/index/index",
     "pages/ucenter/address/address",
     "pages/ucenter/addressAdd/addressAdd",
-    "pages/ucenter/order/order",
-    "pages/ucenter/orderDetail/orderDetail",
-    "pages/ucenter/coupon/coupon",
     "pages/ucenter/collect/collect",
     "pages/auth/login/login",
     "pages/payResult/payResult",
@@ -21,7 +18,6 @@
     "pages/brandDetail/brandDetail",
     "pages/search/search",
     "pages/category/category",
-    "pages/cart/cart",
     "pages/shopping/checkout/checkout",
     "pages/goods/goods"
   ],
@@ -47,11 +43,6 @@
         "pagePath": "pages/catalog/catalog",
         "iconPath": "images/tabbar/menu-f.png",
         "selectedIconPath": "images/tabbar/menu-o.png"
-      },
-      {
-        "pagePath": "pages/cart/cart",
-        "iconPath": "images/tabbar/cart-f.png",
-        "selectedIconPath": "images/tabbar/cart-o.png"
       },
       {
         "pagePath": "pages/ucenter/index/index",

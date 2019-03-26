@@ -7,20 +7,15 @@
       </view>
     </view>
     <view class="my-info-order">
-      <view class="list-icon" bindtap="goOrder" data-index="0">
-        <view class="{{tabClass[0]}}"></view>
-        <image src="../../../images/my-icon-1.png" />
-        <text>我的订单</text>
-      </view>
       <view class="list-icon" bindtap="goCollect" data-index="2">
-        <view class="{{tabClass[2]}}"></view>
+        <view class="{{tabClass[1]}}"></view>
         <image src="../../../images/my-icon-3.png" />
         <text>我的收藏</text>
       </view>
       <view class="list-icon" bindtap="goAddress" data-index="3">
-        <view class="{{tabClass[3]}}"></view>
+        <view class="{{tabClass[2]}}"></view>
         <image src="../../../images/my-icon-4.png" />
-        <text>收货地址</text>
+        <text>我的地址</text>
       </view>
     </view>
   </view>

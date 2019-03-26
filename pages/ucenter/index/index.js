@@ -43,29 +43,6 @@ Page({
       });
     }
   },
-  goOrder() {
-    if (app.globalData.hasLogin) {
-      wx.navigateTo({
-        url: "/pages/ucenter/order/order"
-      });
-    } else {
-      wx.navigateTo({
-        url: "/pages/auth/login/login"
-      });
-    }
-  },
-  goCoupon() {
-    if (app.globalData.hasLogin) {
-      wx.navigateTo({
-        url: "/pages/ucenter/coupon/coupon"
-      });
-    } else {
-      wx.navigateTo({
-        url: "/pages/auth/login/login"
-      });
-    };
-
-  },
   goCollect() {
     if (app.globalData.hasLogin) {
       wx.navigateTo({
