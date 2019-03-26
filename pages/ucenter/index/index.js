@@ -66,17 +66,6 @@ Page({
     };
 
   },
-  goGroupon() {
-    if (app.globalData.hasLogin) {
-      wx.navigateTo({
-        url: "/pages/groupon/myGroupon/myGroupon"
-      });
-    } else {
-      wx.navigateTo({
-        url: "/pages/auth/login/login"
-      });
-    };
-  },
   goCollect() {
     if (app.globalData.hasLogin) {
       wx.navigateTo({

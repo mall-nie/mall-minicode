@@ -23,10 +23,7 @@
     "pages/category/category",
     "pages/cart/cart",
     "pages/shopping/checkout/checkout",
-    "pages/goods/goods",
-    "pages/groupon/myGroupon/myGroupon",
-    "pages/groupon/grouponDetail/grouponDetail",
-    "pages/groupon/grouponList/grouponList"
+    "pages/goods/goods"
   ],
   "window": {
     "navigationBarTitleText": "Renard",
@@ -40,7 +37,6 @@
     "selectedColor": "#e64340",
     "borderStyle": "white",
     "backgroundColor": "#fff",
-    "box-shadow": "0 0 6px 0",
     "list": [
       {
         "pagePath": "pages/index/index",
