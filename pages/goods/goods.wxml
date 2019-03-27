@@ -131,5 +131,5 @@
   <view class="l l-collect" bindtap="showShare" wx:if="{{!isGroupon && canWrite}}">
     <image class="icon" src="../../images/goods-share.png" />
   </view>
-  <view class="r" bindtap="addCollectOrNot" wx:if="{{!soldout}}" wx:if="{{!isCollect}}"> <text></text> </view>
+  <view class="r" bindtap="addCollectOrNot">{{collectStatus}}</view>
 </view>
