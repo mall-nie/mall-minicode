@@ -148,19 +148,6 @@ Page({
     });
   },
 
-  // 团购选择
-  clickGroupon: function(event) {
-    let that = this;
-
-    //参与团购，不可更改选择
-    if (that.data.isGroupon) {
-      return;
-    }
-
-    let specName = event.currentTarget.dataset.name;
-    let specValueId = event.currentTarget.dataset.valueId;
-  },
-
   // 规格选择
   clickSkuValue: function(event) {
     let that = this;
