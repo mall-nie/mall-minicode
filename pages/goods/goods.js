@@ -9,14 +9,13 @@ Page({
   data: {
     id: 0,
     goods: {},
-    attribute: [],
+    attributeList: [],
     issueList: [],
     comment: [],
     brand: {},
     specificationList: [],
     productList: [],
     relatedGoods: [],
-    cartGoodsCount: 0,
     userHasCollect: 0,
     number: 1,
     checkedSpecText: '规格数量选择',
@@ -28,46 +27,57 @@ Page({
     collectImage: '/static/images/icon_collect.png',
     shareImage: '',
     soldout: false,
-    collectStatus:"收藏",
-    canWrite: false
+    collectStatus:"收藏"
   },
+
+  onReady: function () {
+    // 页面渲染完成
+    this.sharePop = this.selectComponent("#sharePop");
+    this.notify = this.selectComponent("#van-notify");
+  },
+  // 下拉刷新
+  onPullDownRefresh() {
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    this.getGoodsInfo();
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
+  },
+  
+  onShow: function () {
+    // 页面显示
+    if (app.globalData.hasLogin){
+      this.getCollectStatus();
+    }
+  },
+
+
+  onLoad: function (options) {
+    // 页面初始化 options为页面跳转所带来的参数
+    if (options.id) {
+      this.setData({
+        id: parseInt(options.id)
+      });
+      this.getGoodsInfo();
+    }
+  },
+
 
   // 页面分享
   onShareAppMessage: function() {
     let that = this;
     return {
       title: that.data.goods.name,
-      desc: '唯爱与美食不可辜负',
+      desc: '精品推荐',
       path: '/pages/index/index?goodId=' + this.data.id
     }
   },
-  handleSetting: function(e) {
-      var that = this;
-      // console.log(e)
-      if (!e.detail.authSetting['scope.writePhotosAlbum']) {
-          wx.showModal({
-              title: '警告',
-              content: '不授权无法保存',
-              showCancel: false
-          })
-          that.setData({
-              canWrite: false
-          })
-      } else {
-          wx.showToast({
-              title: '保存成功'
-          })
-          that.setData({
-              canWrite: true
-          })
-      }
-  },
+
   showShare: function() {
     this.sharePop.togglePopup();
   },
 
 
-  // 获取商品信息
+  // 获取商品信息 没有问题
   getGoodsInfo: function() {
     wx.showLoading({
       title: '加载中',
@@ -106,7 +116,7 @@ Page({
 
         that.setData({
           goods: res.data.info,
-          attribute: res.data.attribute,
+          attributeList: res.data.attribute,
           issueList: res.data.issue,
           comment: res.data.comment,
           brand: res.data.brand,
@@ -134,7 +144,7 @@ Page({
     });
   },
 
-  // 获取推荐商品
+  // 获取推荐商品 没有问题
   getGoodsRelated: function() {
     let that = this;
     util.request(api.GoodsRelated, {
@@ -148,7 +158,7 @@ Page({
     });
   },
 
-  // 规格选择
+  // 规格选择 
   clickSkuValue: function(event) {
     let that = this;
     let specName = event.currentTarget.dataset.name;
@@ -302,57 +312,6 @@ Page({
     });
   },
 
-  onLoad: function(options) {
-    // 页面初始化 options为页面跳转所带来的参数
-    if (options.id) {
-      this.setData({
-        id: parseInt(options.id)
-      });
-      this.getGoodsInfo();
-    }
-
-    let that = this;
-    wx.getSetting({
-        success: function (res) {
-            console.log(res)
-            //不存在相册授权
-            if (!res.authSetting['scope.writePhotosAlbum']) {
-                wx.authorize({
-                    scope: 'scope.writePhotosAlbum',
-                    success: function () {
-                        that.setData({
-                            canWrite: true
-                        })
-                    },
-                    fail: function (err) {
-                        that.setData({
-                            canWrite: false
-                        })
-                    }
-                })
-            } else {
-                that.setData({
-                    canWrite: true
-                });
-            }
-        }
-    })
-
-  },
-
-  onShow: function() {
-    // 页面显示
-    var that = this;
-    util.request(api.CartGoodsCount).then(function(res) {
-      if (res.errno === 0) {
-        that.setData({
-          cartGoodsCount: res.data
-        });
-      }
-    });
-    this.collectStatus();
-  },
-
   //添加或是取消收藏
   addCollectOrNot: function() {
     let that = this;
@@ -382,7 +341,7 @@ Page({
       });
   },
   //收藏状态
-  collectStatus: function () {
+  getCollectStatus: function () {
     let that = this;
     util.request(api.CollectStatus, {
       type: 0,
@@ -445,18 +404,6 @@ Page({
     wx.switchTab({
       url: '/pages/cart/cart'
     });
-  },
-  onReady: function() {
-    // 页面渲染完成
-    this.sharePop = this.selectComponent("#sharePop");
-    this.notify = this.selectComponent("#van-notify");
-  },
-  // 下拉刷新
-  onPullDownRefresh() {
-    wx.showNavigationBarLoading() //在标题栏中显示加载
-    this.getGoodsInfo();
-    wx.hideNavigationBarLoading() //完成停止加载
-    wx.stopPullDownRefresh() //停止下拉刷新
   },
   //根据已选的值，计算其它值的状态
   setSpecValueStatus: function() {},
