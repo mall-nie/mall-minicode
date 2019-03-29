@@ -129,4 +129,7 @@
     <image class="icon" src="../../images/goods-share.png" />
   </view>
   <view class="r" bindtap="addCollectOrNot">{{collectStatus}}</view>
+  <view class="r"><poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
+    分享
+</poster></view>
 </view>
