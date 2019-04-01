@@ -1,7 +1,6 @@
 {
   "navigationBarTitleText": "商品详情",
   "usingComponents": {
-    "sharePop": "/components/sharePop/sharePop",
     "goodList": "/components/goodList/goodList",
     "poster": "/components/miniprogram_dist/poster/index",
     "van-notify": "/components/notify/index"

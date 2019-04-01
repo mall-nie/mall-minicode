@@ -147,91 +147,6 @@ const posterConfig = {
       }
     ]
 
-  },
-  demoConfig: {
-    width: 750,
-    height: 1000,
-    backgroundColor: '#fff',
-    debug: false,
-    blocks: [{
-      x: 0,
-      y: 10,
-      width: 750, // 如果内部有文字，由文字宽度和内边距决定
-      height: 120,
-      paddingLeft: 0,
-      paddingRight: 0,
-      borderWidth: 10,
-      borderColor: 'red',
-      backgroundColor: 'blue',
-      borderRadius: 40,
-      text: {
-        text: [{
-            text: '金额¥ 1.00',
-            fontSize: 80,
-            color: 'yellow',
-            opacity: 1,
-            marginLeft: 50,
-            marginRight: 10,
-          },
-          {
-            text: '金额¥ 1.00',
-            fontSize: 20,
-            color: 'yellow',
-            opacity: 1,
-            marginLeft: 10,
-            textDecoration: 'line-through',
-          },
-        ],
-        baseLine: 'middle',
-      },
-    }],
-    texts: [{
-        x: 0,
-        y: 180,
-        text: [{
-          text: '长标题长标题长标题长标题长标题长标题长标题长标题长标题',
-          fontSize: 40,
-          color: 'red',
-          opacity: 1,
-          marginLeft: 0,
-          marginRight: 10,
-          width: 200,
-          lineHeight: 40,
-          lineNum: 2,
-        }],
-        baseLine: 'middle',
-      }
-
-    ],
-    images: [{
-        url: 'https://lc-I0j7ktVK.cn-n1.lcfile.com/02bb99132352b5b5dcea.jpg',
-        width: 300,
-        height: 300,
-        y: 450,
-        x: 0,
-        // borderRadius: 150,
-        // borderWidth: 10,
-        // borderColor: 'red',
-      },
-      {
-        url: 'https://lc-I0j7ktVK.cn-n1.lcfile.com/02bb99132352b5b5dcea.jpg',
-        width: 100,
-        height: 100,
-        y: 450,
-        x: 400,
-        borderRadius: 100,
-        borderWidth: 10,
-      },
-    ],
-    lines: [{
-      startY: 800,
-      startX: 10,
-      endX: 300,
-      endY: 800,
-      width: 5,
-      color: 'red',
-    }]
-
   }
 }
 
@@ -254,6 +169,7 @@ Page({
     checkedSpecText: '规格数量选择',
     tmpSpecText: '请选择规格数量',
     checkedSpecPrice: 0,
+    showPop: false,
     openAttr: false,
     noCollectImage: '/static/images/icon_collect.png',
     hasCollectImage: '/static/images/icon_collect_checked.png',
@@ -265,7 +181,6 @@ Page({
 
   onReady: function() {
     // 页面渲染完成
-    this.sharePop = this.selectComponent("#sharePop");
     this.notify = this.selectComponent("#van-notify");
   },
   // 下拉刷新
@@ -305,10 +220,18 @@ Page({
     }
   },
 
-  showShare: function() {
-    this.sharePop.togglePopup();
+  closeShare: function () {
+    this.setData({
+      showPop: false,
+    });
   },
 
+  togglePopup: function() {
+    let that = this;
+    this.setData({
+      showPop: !this.data.showPop,
+    });
+  },
 
   // 获取商品信息 没有问题
   getGoodsInfo: function() {

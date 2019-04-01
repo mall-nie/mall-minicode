@@ -46,7 +46,7 @@
       </view>
 
       <!-- 规格列表 -->
-      <view class="spec-con" wx:if="{{specificationList.length > 0}}" >
+      <view class="spec-con" wx:if="{{specificationList.length > 0}}">
         <view class="spec-item" wx:for="{{specificationList}}" wx:key="name">
           <view class="name">{{item.name}}</view>
           <view class="values">
@@ -68,7 +68,7 @@
     </view>
   </view>
 
-  <view class="goods-attr" wx:if="{{attributeList.length > 0}}" >
+  <view class="goods-attr" wx:if="{{attributeList.length > 0}}">
     <view class="t">商品参数</view>
     <view class="l">
       <view class="item" wx:for="{{attributeList}}" wx:key="name">
@@ -125,11 +125,28 @@
 
 <!-- 底部按钮 -->
 <view class="bottom-btn">
-  <view class="l l-collect" bindtap="showShare">
+  <view class="l l-collect" bindtap="togglePopup">
     <image class="icon" src="../../images/goods-share.png" />
   </view>
   <view class="r" bindtap="addCollectOrNot">{{collectStatus}}</view>
-  <view class="r"><poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
-    分享
-</poster></view>
+</view>
+
+<!-- 分享 -->
+<view class="share-pop-box" hidden="{{!showPop}}">
+  <view class="share-pop" style='bottom:{{bottom}}rpx;'>
+    <view class="share-close" bindtap="closeShare">
+      <image class="share-icon" src="/static/images/icon_close.png"></image>
+    </view>
+    <view class="share-items">
+      <view class='share-touser'>
+        <button style="opacity:0;height: 160rpx;width: 160rpx;" open-type="share">分享给朋友
+        </button>
+      </view>
+      <view class='share-friend'>
+        <poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
+          分享到朋友圈
+        </poster>
+      </view>
+    </view>
+  </view>
 </view>
