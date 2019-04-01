@@ -1,4 +1,5 @@
 import Notify from '../../components/notify/index';
+import Poster from '../../components/miniprogram_dist/poster/poster';
 var app = getApp();
 var WxParse = require('../../lib/wxParse/wxParse.js');
 var util = require('../../utils/util.js');
@@ -325,6 +326,15 @@ Page({
           relatedGoods: res.data.goodsList,
         });
       }
+    });
+  },
+
+  // 生成海报
+  onCreatePoster() {
+    this.setData({
+      posterConfig: posterConfig.jdConfig
+    }, () => {
+      Poster.create(true); // 入参：true为抹掉重新生成
     });
   },
 

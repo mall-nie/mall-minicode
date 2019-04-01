@@ -143,9 +143,11 @@
         </button>
       </view>
       <view class='share-friend'>
-        <poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
-          分享到朋友圈
+        <poster id="poster" hide-loading="{{true}}" preload="{{false}}" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
         </poster>
+        <button style="opacity:0;height: 160rpx;width: 160rpx;" bindtap='onCreatePoster'>
+          分享到朋友圈
+        </button>
       </view>
     </view>
   </view>

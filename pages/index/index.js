@@ -24,10 +24,12 @@ Page({
   },
 
   saveFormId: function(v) {
-    if (v.detail.formId != 'the formId is a mock one') {
-      util.request(api.UserFormIdCreate, {
-        formId: v.detail.formId
-      });
+    if (app.globalData.hasLogin) {
+      if (v.detail.formId != 'the formId is a mock one') {
+        util.request(api.UserFormIdCreate, {
+          formId: v.detail.formId
+        });
+      }
     }
   },
 
