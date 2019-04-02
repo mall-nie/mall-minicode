@@ -31,13 +31,6 @@ module.exports = {
   BrandList: WxApiRoot + 'brand/list', //品牌列表
   BrandDetail: WxApiRoot + 'brand/detail', //品牌详情
 
-  CartList: WxApiRoot + 'cart/index', //获取购物车的数据
-  CartAdd: WxApiRoot + 'cart/add', // 添加商品到购物车
-  CartFastAdd: WxApiRoot + 'cart/fastadd', // 立即购买商品
-  CartUpdate: WxApiRoot + 'cart/update', // 更新购物车的商品
-  CartDelete: WxApiRoot + 'cart/delete', // 删除购物车的商品
-  CartChecked: WxApiRoot + 'cart/checked', // 选择或取消选择商品
-  CartGoodsCount: WxApiRoot + 'cart/goodscount', // 获取购物车商品件数
   CartCheckout: WxApiRoot + 'cart/checkout', // 下单前信息确认
 
   CollectList: WxApiRoot + 'collect/list', //收藏列表
